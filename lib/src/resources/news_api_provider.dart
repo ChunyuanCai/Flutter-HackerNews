@@ -9,13 +9,11 @@ class NewsApiProvider {
 
   fetchTopIds() async {
     final response = await client.get("$_endpoint/topstories.json");
-    final ids = json.decode(response.body);
-    return ids;
+    return json.decode(response.body);
   }
 
   fetchItem(int id) async {
     final response = await client.get("$_endpoint/item/$id.json");
-    final parsedJson = json.decode(response.body);
-    return ItemModel.fromJson(parsedJson);
+    return ItemModel.fromJson(json.decode(response.body));
   }
 }

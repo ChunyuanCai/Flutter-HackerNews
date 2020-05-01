@@ -7,12 +7,13 @@ final _endpoint = "https://hacker-news.firebaseio.com/v0";
 class NewsApiProvider {
   Client client = Client();
 
-  fetchTopIds() async {
+  Future<List<int>> fetchTopIds() async {
     final response = await client.get("$_endpoint/topstories.json");
-    return json.decode(response.body);
+    final ids = json.decode(response.body);
+    return ids.cast<int>();
   }
 
-  fetchItem(int id) async {
+  Future<ItemModel> fetchItem(int id) async {
     final response = await client.get("$_endpoint/item/$id.json");
     return ItemModel.fromJson(json.decode(response.body));
   }
